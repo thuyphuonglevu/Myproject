@@ -1,6 +1,6 @@
 Xin chào, tôi là Phương Thúy
 
-Repository này tổng hợp các project liên quan đến Data Science, Machine Learning và AI Application.
+Repository này tổng hợp các project liên quan đến Data Aanalytics, Machine Learning và AI Application.
 
 Mỗi thư mục đại diện cho một project độc lập. Để xem chi tiết về từng project, vui lòng truy cập README bên trong từng folder.
 
@@ -56,7 +56,6 @@ Xem chi tiết tại:
 
 ## Notes
 
-- Các project được tổ chức độc lập để dễ phát triển và mở rộng.
 - Mỗi project có dataset, pipeline và mô hình riêng.
 - README trong từng folder sẽ mô tả:
   - Mục tiêu project
