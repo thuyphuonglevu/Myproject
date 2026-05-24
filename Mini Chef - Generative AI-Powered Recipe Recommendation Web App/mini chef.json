@@ -1,0 +1,511 @@
+{
+  "name": "mini chef 2",
+  "nodes": [
+    {
+      "parameters": {
+        "modelName": "sentence-transformers/all-MiniLM-L6-v2",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
+      "typeVersion": 1,
+      "position": [
+        3520,
+        736
+      ],
+      "id": "fef1b198-e421-4de4-af00-a28e489b6855",
+      "name": "Embeddings HuggingFace Inference",
+      "credentials": {
+        "huggingFaceApi": {
+          "id": "C32rtBW1kCs7T2Gg",
+          "name": "HuggingFaceApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "qwen/qwen-2.5-72b-instruct",
+        "options": {
+          "responseFormat": "json_object",
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        3088,
+        1360
+      ],
+      "id": "cf9e3139-dfc3-4932-9c08-6e04cd58a40e",
+      "name": "OpenRouter Chat Model2",
+      "credentials": {
+        "openRouterApi": {
+          "id": "aZNau7xRXUCDqw8w",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "97655331-1251-4709-b31f-e6e0f0caf2ea",
+              "leftValue": "={{ $json.mode }}",
+              "rightValue": "found",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        2864,
+        928
+      ],
+      "id": "0ee44ee5-5766-4ddb-9f58-9d3d13e44e53",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "model": "qwen/qwen-2.5-72b-instruct",
+        "options": {
+          "responseFormat": "json_object"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        3680,
+        1088
+      ],
+      "id": "88fd4db9-32d6-4f8d-a78c-c48052ee6431",
+      "name": "OpenRouter Chat Model3",
+      "credentials": {
+        "openRouterApi": {
+          "id": "aZNau7xRXUCDqw8w",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://qamhggbyyrtcqflikbyn.supabase.co/rest/v1/rpc/match_recipes_latest_2",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFhbWhnZ2J5eXJ0Y3FmbGlrYnluIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4ODU1OTAsImV4cCI6MjA4ODQ2MTU5MH0.y1cqqd-wDlEvovCoQw2mnDXNhXtsMB3H1mLuDlvHyts"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFhbWhnZ2J5eXJ0Y3FmbGlrYnluIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4ODU1OTAsImV4cCI6MjA4ODQ2MTU5MH0.y1cqqd-wDlEvovCoQw2mnDXNhXtsMB3H1mLuDlvHyts"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "match_count",
+              "value": "15"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        3968,
+        512
+      ],
+      "id": "1be5add7-98b8-4078-b40d-07e4dc7c50a2",
+      "name": "Supabase Vector Search1",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "EAA1ecCyUh8YlPCr",
+          "name": "Ver 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "if (!items.length) {\n  return [{ json: { mode: \"generate\" } }];\n}\n\nlet best = null;\nlet bestScore = 0;\n\nfor (const item of items) {\n  const r = item.json;\n\n  let ingredients = r.ingredients;\n\n  if (typeof ingredients === \"string\") {\n    try {\n      ingredients = JSON.parse(ingredients);\n    } catch {\n      ingredients = ingredients.split(\",\");\n    }\n  }\n\n  const ingredientCount = ingredients.length;\n  const similarity = r.similarity || 0;\n\n  // penalty nếu recipe quá ít ingredient\n  const factor = ingredientCount < 4 ? 0.6 : 1;\n\n  const score = similarity * factor;\n\n  if (score > bestScore) {\n    bestScore = score;\n    best = r;\n  }\n}\n\nif (!best || bestScore < 0.7) {\n  return [{ json: { mode: \"generate\" } }];\n}\n\nreturn [\n  {\n    json: {\n      mode: \"found\",\n      id: best.id,\n      title: best.title,\n      ingredients: best.ingredients,\n      instruction: best.instruction,\n      similarity: best.similarity,\n      score: bestScore\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4208,
+        512
+      ],
+      "id": "aff5d903-fe03-48ea-b7c5-1cb08755b01c",
+      "name": "Pick Best Recipe Match1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const recipe = $input.first().json;\n\nreturn [{\n  json: {\n    mode: \"found\",\n    recipe_id: recipe.id,\n    instructions: recipe.instruction\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3104,
+        912
+      ],
+      "id": "09a57c7d-cfaa-4254-8429-d01644b14035",
+      "name": "Format Recipe Output1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Recipe name:\n{{ $('If1').item.json.title }}\n\nRequired ingredients:\n{{ $('If1').item.json.ingredients }}\n\n\nUser ingredients:\n{{ $('Join Ingredients').item.json.joined_ingredients }}\nMissing ingredients:\n{{ $json.missing_ingredients }}\n\nOriginal instructions:\n{{ $('If1').item.json.instruction }}\n\nPlease respond according to your system rules.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an AI cooking assistant.\n\nYour task is to adapt a recipe based on the ingredients the user currently has.\n\nINPUT:\n- recipe_name\n- ingredients_required (ingredients from the original recipe)\n- user_ingredients (ingredients available to the user)\n- cooking_steps (original recipe steps)\n\nSTEP 1 — Normalize Ingredients\n\nBefore doing any reasoning, normalize all ingredients.\n\nRules:\n- convert to lowercase\n- convert plural to singular (onions → onion, tomatoes → tomato, carrots → carrot)\n- remove extra spaces\n- keep ingredient meaning unchanged\n\nSTEP 2 — Ingredient Comparison\n\nCompare the normalized user ingredients with the normalized recipe ingredients.\n\nIdentify:\n- ingredients_required\n- user_ingredients\n- missing_ingredients (ingredients in recipe but not in user ingredients)\n\nSTEP 3 — Substitution\n\nFor each missing ingredient, try to find a reasonable substitute from user ingredients.\n\nExamples:\nolive oil → butter  \nparmesan cheese → cheese  \nspaghetti sauce → tomato  \nlasagne noodles → pasta  \n\nIf no reasonable substitute exists, set substitute to \"none\".\n\nSTEP 4 — Cooking Step Adaptation\n\nRewrite the cooking steps so that they:\n\n1. Use ONLY:\n   - user ingredients\n   - substituted ingredients\n2. NEVER use ingredients that are missing and have no substitute.\n3. Remove steps that require unavailable ingredients.\n4. Simplify the recipe if necessary.\n5. Keep the dish logically cookable.\n\nIf the recipe cannot realistically be made with the available ingredients,\ncreate a simplified dish based only on user ingredients.\n\nSTEP 5 — Output Format\n\nReturn ONLY valid JSON using this exact structure:\n\n{\n  \"recipe_name\": \"\",\n  \"ingredients_required\": [],\n  \"user_ingredients\": [],\n  \"missing_ingredients\": [],\n  \"substitutions\": [\n    {\n      \"item\": \"\",\n      \"substitute\": \"\"\n    }\n  ],\n  \"cooking_steps\": []\n}\n\nRules:\n- cooking_steps must be rewritten to match the available ingredients\n- NEVER include ingredients the user does not have\n- steps must be realistic cooking instructions\n- keep steps concise\n- return only JSON"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        3680,
+        912
+      ],
+      "id": "73fb2dae-99a2-4bd5-bf74-cce151255936",
+      "name": "AI Response (Found)1"
+    },
+    {
+      "parameters": {
+        "jsCode": "let required = $('Pick Best Recipe Match1').first().json.ingredients;\nlet user = $('Join Ingredients').first().json.joined_ingredients;\n\n// convert required -> array nếu đang là string\nif (typeof required === \"string\") {\n  required = JSON.parse(required.replace(/'/g, '\"'));\n}\n\n// convert user -> array\nif (typeof user === \"string\") {\n  user = user.split(\",\").map(i => i.trim().toLowerCase());\n}\n\n// normalize required\nrequired = required.map(i => i.trim().toLowerCase());\n\nconst missing = required.filter(i => !user.includes(i));\n\nreturn [\n  {\n    json: {\n      ...$json,\n      missing_ingredients: missing\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3376,
+        912
+      ],
+      "id": "aa82674a-73f2-4e24-a3d8-1ee7cfd722ce",
+      "name": "Calculate Missing Ingredients1"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        4240,
+        1168
+      ],
+      "id": "7251d5f2-a700-4751-bdcd-0fe1c8cb8fc3",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=User available ingredients: {{ $('Webhook1').item.json.body }}\nRecipe from database: {{ $json.recipe_from_db || \"None\" }}\n\nINSTRUCTIONS:\n1. Check if a recipe from the database was provided.\n2. If \"None\", generate a simple recipe using at least 2 of the user's ingredients: {{ $('Webhook1').item.json.body.ingredients.join(\", \") }}\n3. You may ONLY add salt, oil, water, or pepper if they are not in the list. Do NOT add any other \"imaginary\" ingredients.\n4. If the database recipe is provided, identify which of the user's ingredients can be used and what is missing.\n5. Return the result strictly in the JSON format requested in the system instructions.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a strict JSON-only cooking assistant.\n\nCRITICAL OUTPUT RULES:\n- Return ONLY a raw JSON object.\n- Do NOT include markdown (```), explanations, or text outside the JSON.\n- Do NOT wrap the result inside \"output\".\n- Do NOT rename keys.\n- Do NOT add new keys.\n- The JSON must be valid and directly parsable.\n\nINGREDIENT RULES:\n- If recipe_from_db exists: use it as the base recipe.\n- Compare user_ingredients with ingredients_required.\n- List missing_ingredients.\n- Suggest simple substitutions if possible.\n\n- If recipe_from_db is null or empty:\n  Create a simple dish using ONLY:\n  - user_ingredients\n  - basic staples: salt, oil, water, pepper\n  Do NOT invent other ingredients.\n\nOUTPUT REQUIREMENTS:\n- Always include ALL fields below.\n- If a field has no data, return an empty array [].\n\nREQUIRED JSON STRUCTURE:\n\n{\n \"recipe_name\": \"\",\n \"ingredients_required\": [],\n \"user_ingredients\": [],\n \"missing_ingredients\": [],\n \"substitutions\": [],\n \"cooking_steps\": []\n}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        3088,
+        1168
+      ],
+      "id": "41212c2b-068e-4781-8fda-2e2dd3082390",
+      "name": "AI Response (Generate)1"
+    },
+    {
+      "parameters": {
+        "jsCode": "let data = $json.output ?? $json;\n\n// nếu AI trả string JSON\nif (typeof data === \"string\") {\n  data = data.replace(/```json/g, \"\").replace(/```/g, \"\").trim();\n  data = JSON.parse(data);\n}\n\nreturn [\n{\njson: {\nrecipe_name: data.recipe_name ?? \"Unknown Recipe\",\ningredients_required: data.ingredients_required ?? [],\nuser_ingredients: data.user_ingredients ?? [],\nmissing_ingredients: data.missing_ingredients ?? [],\nsubstitutions: data.substitutions ?? [],\ncooking_steps: data.cooking_steps ?? []\n}\n}\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4032,
+        1168
+      ],
+      "id": "de46f70d-87d9-4bf2-9aff-afbe6f97b594",
+      "name": "Clean & Parse AI JSON Response1"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "minichefv2",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        2800,
+        512
+      ],
+      "id": "19f7d425-68ca-4e16-a217-5ffff074830d",
+      "name": "Webhook1",
+      "webhookId": "5ab91cf1-b062-410c-8094-c012501f84f1"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "user_ingredients",
+          "mode": "list",
+          "cachedResultName": "user_ingredients"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        3568,
+        512
+      ],
+      "id": "c785b3a0-3845-4ae7-82a7-61d7ac960693",
+      "name": "Supabase Vector Store",
+      "credentials": {
+        "supabaseApi": {
+          "id": "EAA1ecCyUh8YlPCr",
+          "name": "Ver 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        3648,
+        736
+      ],
+      "id": "7f7c7277-a8f6-49b4-9024-532bcac5595c",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      joined_ingredients: $json.body.ingredients.join(\", \")\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3040,
+        512
+      ],
+      "id": "48405118-0d76-43d3-a3f4-32a8b445b0a5",
+      "name": "Join Ingredients"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenRouter Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Response (Generate)1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Format Recipe Output1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Response (Generate)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Response (Found)1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Search1": {
+      "main": [
+        [
+          {
+            "node": "Pick Best Recipe Match1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pick Best Recipe Match1": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Recipe Output1": {
+      "main": [
+        [
+          {
+            "node": "Calculate Missing Ingredients1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Response (Found)1": {
+      "main": [
+        [
+          {
+            "node": "Clean & Parse AI JSON Response1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Missing Ingredients1": {
+      "main": [
+        [
+          {
+            "node": "AI Response (Found)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Response (Generate)1": {
+      "main": [
+        [
+          {
+            "node": "Clean & Parse AI JSON Response1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clean & Parse AI JSON Response1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Join Ingredients",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings HuggingFace Inference": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Search1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Join Ingredients": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "9bf0bdb0-6512-4e5c-b5a9-daad8be9aeeb",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "04ca8a4de426d0a907c6aca144abc03b267f0832f4ecf3d23b73ea9d8e2a7f33"
+  },
+  "id": "OViuAXwSgXzoGueH",
+  "tags": []
+}
