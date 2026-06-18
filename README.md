@@ -67,6 +67,13 @@ Xem chi tiết tại:
 - Machine Learning
 - Deep Learning
 - Jupyter Notebook
+- n8n
+- Figma
+- BPMN
+- DFD
+- Use Case Diagram
+- Sequence Diagram
+- ERD
 
 ---
 
