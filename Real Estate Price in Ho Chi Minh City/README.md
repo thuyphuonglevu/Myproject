@@ -84,11 +84,13 @@ Dự án tập trung phân tích dữ liệu và xây dựng mô hình machine l
 
 ## Cấu trúc thư mục
 - Crawler.py: file code crawl data từ trang batdongsan.com
-- Kiến_tập_EDA.ipynb: file code và kết quả EDA
-- data_final.zip: file data sau khi tổng hợp các từ các nguồn bán bất động sản khác nhau
+- KT_EDA.ipynb: file code và kết quả EDA
+- data_final_processed.zip: file data sau khi loại bỏ outlier
+- KT_code_model.ipynb: file code và kết quả mô hình dự báo giá bất động sản
 
 ---
 
 ## Hướng phát triển
+- Sử dụng thêm trường description và title cho mô hình dự báo
 - Tích hợp thêm dữ liệu thị trường theo thời gian thực
 - Xây dựng dashboard trực quan hóa dữ liệu
