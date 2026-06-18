@@ -1,12 +1,28 @@
 Xin chào, tôi là Phương Thúy
 
-Repository này tổng hợp các project liên quan đến Data Aanalytics, Machine Learning và AI Application.
+Repository này tổng hợp các project liên quan đến Product Thinking, Business Analysis, Data Analytics, Machine Learning và AI Applications.
 
 Mỗi thư mục đại diện cho một project độc lập. Để xem chi tiết về từng project, vui lòng truy cập README bên trong từng folder.
 
 ---
 
 ## Project Structure
+### `AURE Perfume Store Management System`
+
+Phân tích và thiết kế hệ thống quản lý cửa hàng nước hoa AURÉ.
+
+Project tập trung vào:
+
+- Phân tích yêu cầu nghiệp vụ và nhu cầu người dùng
+- Mô hình hóa quy trình bằng BPMN và DFD
+- Xây dựng Use Case Diagram và Sequence Diagram
+- Thiết kế cơ sở dữ liệu bằng ERD
+
+Xem chi tiết tại:
+
+`AURÉ Perfume Store Management System Analysis and Design`
+
+---
 
 ### `Real Estate Price in Ho Chi Minh City`
 Real Estate Price in Ho Chi Minh City
