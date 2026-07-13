@@ -1,4 +1,4 @@
-# Hệ thống Quản lý Chuỗi Bảo quản Chứng cứ Điện tử bằng Blockchain (Evidence Chain of Custody)
+# Ứng dụng Blockchain trong quản lý chứng cứ điện tử (Evidence Chain of Custody)
 
 Dự án xây dựng hệ thống quản lý chứng cứ điện tử (Evidence Chain of Custody - CoC) ứng dụng công nghệ Blockchain nhằm đảm bảo tính toàn vẹn, tính bất biến và khả năng truy vết của chứng cứ trong toàn bộ quá trình xử lý vụ án.
 
