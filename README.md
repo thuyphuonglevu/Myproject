@@ -1,6 +1,6 @@
 Xin chào, tôi là Phương Thúy
 
-Repository này tổng hợp các dự án mình đã thực hiện trong quá trình học tập và làm việc nhóm, bao gồm các lĩnh vực:
+Repository này tổng hợp các dự án tôi đã thực hiện trong quá trình học tập và làm việc nhóm, bao gồm các lĩnh vực:
 
 - Business Analysis
 - Product Analysis
