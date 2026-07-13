@@ -25,7 +25,7 @@ Xem chi tiết tại:
 ---
 
 ### `Real Estate Price in Ho Chi Minh City`
-Real Estate Price in Ho Chi Minh City
+Phân tích và xây dựng mô hình dự báo giá bất động sản tại khu vực Thành phố Hồ Chí Minh
 
 Project tập trung vào:
 - Thu thập và xử lý dữ liệu bất động sản
@@ -40,7 +40,7 @@ Xem chi tiết tại:
 ---
 
 ### `Mini Chef - Generative AI-Powered Recipe Recommendation Web App`
-Mini Chef - Generative AI-Powered Recipe Recommendation Web App
+Mini Chef - Ứng dụng gợi ý công thức nấu ăn sử dụng Generative AI
 
 Project tập trung vào:
 - Semantic recipe recommendation
