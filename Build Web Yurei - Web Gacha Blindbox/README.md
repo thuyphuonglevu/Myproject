@@ -1,4 +1,5 @@
 # Build Web Yurei - Web Gacha Blindbox
+Xây dựng web kinh doanh YUREI mô hình Gacha -  Blindbox
 
 ## Giới thiệu
 
