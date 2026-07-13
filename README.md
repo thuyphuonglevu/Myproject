@@ -1,90 +1,170 @@
 Xin chào, tôi là Phương Thúy
 
-Repository này tổng hợp các project liên quan đến Product Thinking, Business Analysis, Data Analytics, Machine Learning và AI Applications.
+Repository này tổng hợp các dự án mình đã thực hiện trong quá trình học tập và làm việc nhóm, bao gồm các lĩnh vực:
 
-Mỗi thư mục đại diện cho một project độc lập. Để xem chi tiết về từng project, vui lòng truy cập README bên trong từng folder.
+- Business Analysis
+- Product Analysis
+- Data Analytics & Machine Learning
+- AI Application
+- Blockchain Application
+- UI/UX Design
 
----
-
-## Project Structure
-### `AURE Perfume Store Management System`
-
-Phân tích và thiết kế hệ thống quản lý cửa hàng nước hoa AURÉ.
-
-Project tập trung vào:
-
-- Phân tích yêu cầu nghiệp vụ và nhu cầu người dùng
-- Mô hình hóa quy trình bằng BPMN và DFD
-- Xây dựng Use Case Diagram và Sequence Diagram
-- Thiết kế cơ sở dữ liệu bằng ERD
-
-Xem chi tiết tại:
-
-`AURÉ Perfume Store Management System Analysis and Design`
+Mỗi thư mục là một dự án độc lập và có README riêng mô tả mục tiêu, vai trò, nội dung thực hiện và tài liệu liên quan.
 
 ---
 
-### `Real Estate Price in Ho Chi Minh City`
-Phân tích và xây dựng mô hình dự báo giá bất động sản tại khu vực Thành phố Hồ Chí Minh
+## Danh sách dự án
 
-Project tập trung vào:
-- Thu thập và xử lý dữ liệu bất động sản
-- Exploratory Data Analysis (EDA)
-- Feature engineering và preprocessing
-- Xây dựng mô hình dự báo giá bất động sản
-- Đánh giá và tối ưu hiệu suất mô hình Machine Learning
+### 1. Build Web Yurei – Web Gacha Blindbox
+Hệ thống web gacha blindbox với các chức năng Authentication, Gacha, Inventory, Order, Wallet và Transaction History.
 
-Xem chi tiết tại:
-`Real Estate Price in Ho Chi Minh City/README.md`
-
----
-
-### `Mini Chef - Generative AI-Powered Recipe Recommendation Web App`
-Mini Chef - Ứng dụng gợi ý công thức nấu ăn sử dụng Generative AI
-
-Project tập trung vào:
-- Semantic recipe recommendation
-- AI-powered recipe generation
-- Vector similarity search
-- Missing ingredient detection
-- Ingredient substitution suggestion
-- Dynamic cooking step adaptation
-- Structured JSON output formatting
-
-Xem chi tiết tại:
-`Mini Chef - Generative AI-Powered Recipe Recommendation Web App/README.md`
-
----
-
-## Tech Stack
-
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
-- NLP / Embedding Models
-- Vector Database
-- Machine Learning
-- Deep Learning
-- Jupyter Notebook
-- n8n
-- Figma
+**Nội dung chính**
 - BPMN
-- DFD
-- Use Case Diagram
+- Use Case
+- ERD
+- UI/UX (Figma)
+- Prototype
+- Một số giao diện được hiện thực bằng HTML/CSS/JavaScript
+
+➡️ Xem tại thư mục:
+
+```
+Build Web Yurei - Web Gacha Blindbox
+```
+
+---
+
+### 2. Blockchain – Electronic Evidence Management System
+Hệ thống quản lý chứng cứ điện tử ứng dụng Blockchain nhằm đảm bảo tính toàn vẹn và khả năng truy xuất nguồn gốc của chứng cứ.
+
+**Nội dung chính**
+
+- Smart Contract (Solidity)
+- ERD
+- Data Flow
+- UI hệ thống
+- Kiến trúc Blockchain + IPFS + Supabase
+
+🌐 Demo
+
+https://evidence-coc.vercel.app/
+
+➡️ Xem tại thư mục:
+
+```
+Blockchain – Electronic Evidence Management System
+```
+
+---
+
+### 3. Mini Chef - Generative AI-Powered Recipe Recommendation Web App
+Hệ thống gợi ý công thức nấu ăn bằng AI dựa trên nguyên liệu người dùng đang có.
+
+**Nội dung chính**
+
+- Workflow Automation bằng n8n
+- AI Prompt Engineering
+- Vector Search
+- Recipe Recommendation
+- UI Web
+
+🌐 Demo
+
+https://yourminichef.lovable.app/
+
+➡️ Xem tại thư mục:
+
+```
+Mini Chef - Generative AI-Powered Recipe Recommendation Web App
+```
+
+---
+
+### 4. Real Estate Price Prediction
+Dự án dự đoán giá bất động sản tại TP. Hồ Chí Minh bằng Machine Learning.
+
+**Nội dung chính**
+
+- Data Collection
+- Data Cleaning
+- Feature Engineering
+- Machine Learning
+- Ensemble Model
+- SHAP Explainability
+
+➡️ Xem tại thư mục:
+
+```
+Real Estate Price Prediction
+```
+
+---
+
+### 5. AURÉ Perfume Store Management System Analysis and Design
+Dự án phân tích và thiết kế hệ thống quản lý cửa hàng nước hoa.
+
+**Nội dung chính**
+
+- Business Analysis
+- Activity Diagram
 - Sequence Diagram
 - ERD
+- System Analysis
+
+➡️ Xem tại thư mục:
+
+```
+AURÉ Perfume Store Management System Analysis and Design
+```
 
 ---
 
-## Notes
+## Công nghệ & Công cụ
 
-- Mỗi project có dataset, pipeline và mô hình riêng.
-- README trong từng folder sẽ mô tả:
-  - Mục tiêu project
-  - Dataset
-  - Pipeline xử lý
-  - Kiến trúc hệ thống
-  - Mô hình sử dụng
-  - Kết quả đạt được
-  - Hướng phát triển tiếp theo
+### Business Analysis
+- BPMN
+- Use Case Diagram
+- Activity Diagram
+- Sequence Diagram
+- ERD
+- Data Flow 
+
+### Data & AI
+- Python
+- Pandas
+- Scikit-learn
+- LightGBM
+- XGBoost
+- CatBoost
+- SHAP
+- n8n
+- OpenRouter
+
+### Blockchain
+- Solidity
+- Remix Ethereum
+- MetaMask
+- IPFS
+- Supabase
+
+### UI/UX
+- Figma
+- Loveable
+
+---
+
+## Vai trò
+
+Trong các dự án trên, tôi chủ yếu tham gia vào các công việc như:
+
+- Phân tích yêu cầu nghiệp vụ
+- Thiết kế mô hình dữ liệu
+- Mô hình hóa quy trình hệ thống
+- Thiết kế UI/UX mức cơ bản
+- Xây dựng workflow AI
+- Phát triển và kiểm thử một phần chức năng hệ thống
+- Phân tích dữ liệu và xây dựng mô hình Machine Learning
+
+---
+
+Cảm ơn bạn đã ghé thăm repository!
