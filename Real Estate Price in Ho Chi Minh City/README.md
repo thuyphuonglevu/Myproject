@@ -1,4 +1,5 @@
-# Ho Chi Minh City Real Estate Price Prediction
+# Real Estate Price in Ho Chi Minh City
+Phân tích và xây dựng mô hình dự báo giá bất động sản tại khu vực Thành phố Hồ Chí Minh
 
 ## Giới thiệu
 
