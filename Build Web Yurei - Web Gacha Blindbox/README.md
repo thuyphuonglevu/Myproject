@@ -42,6 +42,7 @@ Build Web Yurei - Web Gacha Blindbox
 ├── BPMN Đăng kí & Khôi phục tài khoản.png
 ├── Use Case Admin.png
 ├── ERD.png
+├── Đặc tả Use Case Admin.pdf
 └── UI Web
 ```
 
@@ -49,6 +50,7 @@ Trong đó:
 - **BPMN Đăng kí & Khôi phục tài khoản.png:** Quy trình Đăng ký và Khôi phục tài khoản.
 - **Use Case Admin.png:** Chức năng của Admin.
 - **ERD.png:** Mô hình dữ liệu của hệ thống.
+- **Đặc tả Use Case Admin.pdf**: Bảng đặc tả Use Case Admin
 - **UI Web:** Các màn hình UI được thiết kế bằng Figma.
 
 ---
