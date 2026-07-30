@@ -29,7 +29,6 @@ Repository này tập trung lưu trữ báo cáo, slide và giao diện website 
 Business Model Development for PIDO Handmade Brand
 │
 ├── File báo cáo.pdf
-├── Slide báo cáo.pdf
 └── UI Web
     ├── Trang chủ.png
     ├── Giới thiệu.png
@@ -41,10 +40,15 @@ Business Model Development for PIDO Handmade Brand
 Trong đó:
 
 - **Báo cáo.pdf:** Báo cáo đầy đủ về nghiên cứu thị trường, mô hình kinh doanh, kế hoạch tài chính và chiến lược marketing của dự án.
-- **Slide báo cáo.pdf:** Slide tóm tắt dự án, sử dụng để trình bày dự án trước lớp.
 - **UI Web:** Hình ảnh giao diện một số trang trên website PIDO Studio được thiết kế và triển khai trên nền tảng Wix.
 
 ---
+
+## Slide tóm tắt dự án
+
+Bạn có thể xem tóm tắt dự án tại:
+
+🔗 https://drive.google.com/file/d/1Wr1mnakZl52K52cT7vQ6SZsZEON5E7FE/view?usp=sharing
 
 ## Website Demo
 
