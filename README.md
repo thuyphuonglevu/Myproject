@@ -4,6 +4,7 @@ Repository này tổng hợp các dự án tôi đã thực hiện trong quá tr
 
 - Business Analysis
 - Product Analysis
+- Business Development
 - Data Analytics & Machine Learning
 - AI Application
 - Blockchain Application
@@ -119,6 +120,30 @@ AURÉ Perfume Store Management System Analysis and Design
 
 ---
 
+### 6. Business Model Development for PIDO Handmade Brand
+
+Dự án xây dựng mô hình kinh doanh cho thương hiệu handmade PIDO Studio, từ nghiên cứu thị trường, lập kế hoạch kinh doanh đến triển khai website và bán sản phẩm thực tế.
+
+**Nội dung chính**
+
+- Market Research
+- Business Model
+- Financial Planning
+- Marketing Strategy
+- Website Design (Wix)
+
+🌐 Website
+
+https://wearepido.wixsite.com/pido-studio
+
+➡️ Xem tại thư mục:
+
+```
+Business Model Development for PIDO Handmade Brand
+```
+
+---
+
 ## Công nghệ & Công cụ
 
 ### Business Analysis
@@ -164,6 +189,8 @@ Trong các dự án trên, tôi chủ yếu tham gia vào các công việc như
 - Xây dựng workflow AI
 - Phát triển và kiểm thử một phần chức năng hệ thống
 - Phân tích dữ liệu và xây dựng mô hình Machine Learning
+- Điều phối nhóm, lập kế hoạch và theo dõi tiến độ dự án
+- Phát triển, kiểm tra và đề xuất cải tiến sản phẩm
 
 ---
 
